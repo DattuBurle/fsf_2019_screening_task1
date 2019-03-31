@@ -1,0 +1,51 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Order-eats</title>
+	<link rel="icon" href="{% static 'logo1.png' %}">
+	<style type="text/css">
+		body{
+			margin:0;
+			padding: 0;
+			font-family: sans-serif;
+			background-size: cover;
+
+		}
+
+		.box{
+			position: absolute;
+			top: 50%;
+			left: 20%;
+			transform: translate(-50%,-50%);
+			width:400px;
+			padding: 40px;
+			background: rgba(0,0,0,-8);
+			box-sizing: border-box;
+			box-shadow: 0 15px 25px rgba(0,0,0,-5);
+			border-radius: 10px;
+			border-width: 1px;
+			background-color: orange;
+		}
+	</style>
+</head>
+<body background="{% static 'food.jpg' %}">
+	<div class="box">
+		<h2>Login</h2>
+		<form method="POST" action="{% url 'usercreation:login' %}">
+		{% csrf_token %}
+		{{form.as_p}}
+		{% if request.GET.next %}
+
+		   <input type="hidden" name="next" value="{{request.GET.next}}">
+		   }
+		{% endif %}
+
+		<button type="submit">Login</button>
+
+	    </form>
+
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	 <h1>Update your Details</h1>
+
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{form.as_p}}
+		<button type="submit">Edit</button>
+	</form>
+
+</body>
+</html>

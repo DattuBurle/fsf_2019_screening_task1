@@ -1,0 +1,111 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3-black.css">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<style type="text/css">
+	th,td{
+		padding: 8px;
+	}
+
+	.main_background{
+		background-image: url('{% static 'bu.jpg' %}');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	min-height:600px;
+	position: relative;
+
+	}
+</style>
+</head>
+<body>
+	<nav class="navbar  navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'usercreation:homepage' %}">
+    <img src="{% static 'bu_logo.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+  </a>
+  <form class="form-inline"  method="GET" action="{% url 'usercreation:searchuser' %}">
+    <input class="form-control mr-sm-2" name="q" type="search" placeholder="Add users" aria-label="Search" value="{{request.GET.q}}">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add users</button>
+  </form>
+  <a class="navbar-brand" href="{% url 'usercreation:teamcreation' %}">Create Team</a>
+  <a class="navbar-brand" href="{% url 'task:taskcreation' %}">Create Task</a>
+  <a class="navbar-brand" href="{% url 'usercreation:logout' %}">Logout</a>
+</nav>
+	
+	<h4>
+		{% if messages %}
+		<ul>
+			{% for i in messages %}
+			<li style="color: red;">{{i}}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+	</h4>
+	{% if ob %}
+		<h3 style="margin-bottom: 5px;text-align: center;">Task View</h3>
+
+		<hr>
+		{% endif %}
+	<div style="margin-left: 400px;margin-top: 20px;">
+	      <table style="width: 50%">
+			{% if ob %}
+			<tr>
+				<th>Task name</th>
+				<th>Edit</th>
+				<th>View</th>
+				<th>Comment</th>
+			</tr>
+			{% for i in ob %}
+			<tr>
+			
+			<td>{{i.taskname}}</td>
+			<td><a href="{% url 'task:taskupdate' taskslug=i.taskslug %}">Edit</a></td>
+			<td><a href="{% url 'task:taskview' taskslug1=i.taskslug %}">View</a></td>
+			<td><a href="{% url 'task:taskcomment' taskslug2=i.taskslug %}">Comment</a></td>
+
+			
+		</tr>
+		{% endfor %}
+		
+			{% endif %}
+		</table>
+	</div>
+
+	<div>
+	      <table>
+			{% if ob1 %}
+			{% for i in ob1 %}
+			<tr>
+			
+			<td>{{i.username}}</td>
+			<td><a href="{% url 'usercreation:add' usr=i.username %}">Add</a></td>
+			
+
+			
+		</tr>
+		{% endfor %}
+		
+			{% endif %}
+		</table>
+	</div>
+	<div class="main_background">
+		
+	</div>
+
+</body>
+</html>

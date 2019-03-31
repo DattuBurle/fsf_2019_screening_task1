@@ -1,0 +1,105 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3-black.css">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="bg-image">
+  <nav class="navbar  navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'usercreation:homepage' %}">
+    <img src="{% static 'bu_logo.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="">Bu-Intearction-Portal
+  </a>
+  <a class="navbar-brand" href="{% url 'usercreation:nextpage' %}">Home</a>
+
+  </button>
+
+ 
+</nav>
+</div>
+	<h2>Task</h2>
+	
+
+	<!--table>
+		<th>order-id</th>
+		<th>task</th>
+		<th>date</th>
+		<th>Time</th>
+		<th>Table Size</th>
+		<th>Meal Choice</th>
+		<th>Customer Email</th>
+		<tr>
+			{% for i in res %}
+			<td>
+				{{i.order_id}}
+			</td>
+			<td>{{i.name}}</td>
+			<td>{{i.date}}</td>
+			<td>{{i.slot}}</td>
+			<td>{{i.tablesize}}</td>
+			<td>{{i.mealchoice}}</td>
+			<td>{{i.cust_email}}</td>
+		</tr>
+		{% endfor %}
+	</table-->
+
+	<div class="table-responsive">
+		<table  class="table table-striped table-sm">
+			<thead>
+				<tr>
+			<th>User Id</th>
+			<th>Task Name</th>
+			<th>Task Description</th>
+			<th>Task Assignee</th>
+		</tr>
+			</thead>
+			<tbody>
+				{% if a %}
+		<tr>
+			<td>{{a.taskuser.username}}</td>
+			<td>{{a.taskname}}</td>
+			<td>{{a.taskdescription}}</td>
+			<td>{{a.taskassignee}}</td>
+			
+		</tr>
+		{% endif %}
+			</tbody>
+			
+		</table>
+		
+	</div>
+
+
+	{% if ob3 %}
+	<h3>User Comments</h3>
+	{% for k in ob3 %}
+	<h4>{{k.commentuser.username}}</h4>
+	<h5>{{k.comment_text}}</h5>
+	{% endfor %}
+	{% endif %}
+
+	<h3>Write Your Comment Below</h3>
+
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{form.as_p}}
+		<button type="submit">Comment</button>
+	</form>
+
+</body>
+</html>
